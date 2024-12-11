@@ -1,10 +1,8 @@
-
-
 # dependencies
 /localhost-ssl
 node_modules
 
-./client/node_modules 
+./client/node_modules
 ./client/.pnp
 ./client/.pnp.js
 
@@ -24,3 +22,5 @@ node_modules
 ./client/npm-debug.log*
 ./client/yarn-debug.log*
 ./client/yarn-error.log*
+
+.idea/*

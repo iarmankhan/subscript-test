@@ -1,0 +1,3 @@
+CREATE DATABASE subscript_local;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

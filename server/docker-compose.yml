@@ -1,0 +1,33 @@
+version: '3.7'
+
+networks:
+  local_network:
+    external: true
+
+services:
+  subscript_postgres:
+    image: timescale/timescaledb-ha:pg16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=root
+    volumes:
+      - ./dev/docker-compose.init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d subscript_local"
+        ]
+      interval: 5s 
+      timeout: 5s
+      retries: 5
+  subscript_redis:
+    image: redis:7.2.5
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_PORT=6379
+    ports:
+      - "6379:6379"
