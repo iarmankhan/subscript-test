@@ -24,3 +24,5 @@ node_modules
 ./client/yarn-error.log*
 
 .idea/*
+
+.env
