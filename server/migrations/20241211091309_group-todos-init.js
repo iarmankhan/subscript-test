@@ -47,7 +47,7 @@ exports.up = function (knex) {
       table.uuid("org_id").references("id").inTable("organizations");
       table.string("name").notNullable();
       table.text("description").nullable();
-      table.uuid("created_by").references("id").inTable("users");
+      table.uuid("created_by").references("id").inTable("org_members");
       table.timestamps(true, true);
     });
 
@@ -57,6 +57,10 @@ exports.up = function (knex) {
       table.primary("id");
       table.uuid("project_id").references("id").inTable("projects");
       table.uuid("org_member_id").references("id").inTable("org_members");
+
+      // Unique constraint
+      table.unique(["project_id", "org_member_id"]);
+
       table.timestamps(true, true);
     });
 
@@ -81,6 +85,10 @@ exports.up = function (knex) {
         .uuid("project_member_id")
         .references("id")
         .inTable("project_members");
+
+      // Unique constraint
+      table.unique(["task_id", "project_member_id"]);
+
       table.timestamps(true, true);
     });
 
